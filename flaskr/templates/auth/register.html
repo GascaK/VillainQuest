@@ -3,18 +3,19 @@
 {% block title %}VQ - Register{% endblock %}
 
 {% block content %}
-	<form method="post">
+<h2>Error: {{ error }}</h2>
+	<form method="POST">
 		<div class="form-group">
 			<label for="username">Username</label>
 			<input name="username" class="form-control" id="username" placeholder="Enter Username Here" required>
 		</div>
 		<div class="form-group">
 			<label for="password">Password</label>
-			<input type="password" class="form-control" name="password_f" id="password_f" required>
+			<input type="password" class="form-control" name="password_f" id="password_f">
 			<label for="password">Re-enter Password</label>
 			<input type="password" class="form-control" name="password_s"
-			id="password_s" required>
-			<button type="submit" class="btn btn-primary">Register</button>
+			id="password_s">
+			<input type="submit" value="Register">
 		</div>
 	</form>
 {% endblock %}

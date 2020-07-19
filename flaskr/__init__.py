@@ -2,6 +2,7 @@ import os
 
 from flask import Flask
 from flask import render_template
+from flask import flash
 
 # App factory
 def create_app(test_config=None):
@@ -26,9 +27,10 @@ def create_app(test_config=None):
 
     @app.route('/vquest')
     def vquest():
+        flash('TEST')
         return render_template('vquest.html')
 
-    @app.route('/login')
+    @app.route('/login', methods=['POST', 'GET'])
     def login():
         return render_template('auth/login.html')
 
@@ -39,7 +41,7 @@ def create_app(test_config=None):
     from . import db
     db.init_app(app)
 
-    from . import auth
+    from flaskr import auth
     app.register_blueprint(auth.bp)
 
     return app

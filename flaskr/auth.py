@@ -45,8 +45,8 @@ def register():
             error = 'Username is empty.'
         elif not password_f or not password_s:
             error = 'Password is empty.'
-        elif password_f is not password_s:
-            error = 'Passwords do not match!'
+        #elif password_f != password_s:
+        #    error = 'Passwords do not match!'
         elif db.execute(
             'SELECT id FROM user WHERE username = ?', (username,)
             ).fetchone() is not None:
@@ -55,7 +55,7 @@ def register():
         if error is None:
             db.execute(
                 'INSERT INTO user (username, password) VALUES (?, ?)',
-                (username, generate_password_hash(password))
+                (username, generate_password_hash(password_f))
             )
             db.commit()
             return redirect(url_for('auth.login'))
@@ -109,7 +109,7 @@ def login():
             session.clear()
             # session cookie with user info.
             session['user_id'] = user['id']
-            return redirect(url_for('auth.login'))
+            return redirect(url_for('vquest'))
 
         flash(error)
 

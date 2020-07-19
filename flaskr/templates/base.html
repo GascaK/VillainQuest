@@ -23,18 +23,27 @@
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     	<img src="{{url_for('static', filename='img/vquest.jpg')}}" width="30" height="30" alt="vqlogo" />
-	  <a class="navbar-brand" href="vquest">VillainQuest</a>
+	  <a class="navbar-brand" href="/vquest">VillainQuest</a>
 	  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="n avbarText" aria-expanded="false" aria-label="Toggle navigation">
 	    <span class="navbar-toggler-icon"></span>
 	  </button>
 	  <div class="collapse navbar-collapse" id="navbarText">
 	    <ul class="navbar-nav mr-auto">
+	      {% if g.user %}
 	      <li class="nav-item active">
-	        <a class="nav-link" href="login">Login <span class="sr-only">(current)</span></a>
+	      	<a class="nav-link" href="#">{{ g.user['username'] }}</a>
 	      </li>
 	      <li class="nav-item">
-	        <a class="nav-link" href="register">Register</a>
+	      	<a href="{{ url_for('auth.logout') }}">Log Out</a>
 	      </li>
+	      {% else %}
+	      <li class="nav-item active">
+	        <a class="nav-link" href="{{ url_for('auth.login') }}">Login <span class="sr-only">(current)</span></a>
+	      </li>
+	      <li class="nav-item">
+	        <a class="nav-link" href="{{ url_for('auth.register') }}">Register</a>
+	      </li>
+	      {% endif %}
 	      <li class="nav-item">
 	      	<a class="nav-link" href="https://github.com/GascaK">Github</a>
 	      </li>
@@ -45,7 +54,9 @@
 	  </div>
 	</nav>
 </head>
-
+{% for message in get_flashed_messages() %}
+	<div class="flash">{{ message }}</div>
+{% endfor %}
 
 <body>
 	{% block content %}{% endblock %}

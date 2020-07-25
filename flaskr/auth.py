@@ -45,8 +45,8 @@ def register():
             error = 'Username is empty.'
         elif not password_f or not password_s:
             error = 'Password is empty.'
-        #elif password_f != password_s:
-        #    error = 'Passwords do not match!'
+        elif password_f != password_s:
+            error = 'Passwords do not match!'
         elif db.execute(
             'SELECT id FROM user WHERE username = ?', (username,)
             ).fetchone() is not None:

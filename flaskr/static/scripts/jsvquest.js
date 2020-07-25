@@ -32,7 +32,12 @@ function preload()
     /*this.load.spritesheet('player', 'dude.png',
         { frameWidth: 66, frameHeight: 60 }
     );*/
-    this.load.image('background', 'assets/floor.jpg');
+    var tag = document.getElementById('vquestLoc');
+    var vquestLoc = tag.getAttribute('data-loc');
+
+    console.log("getAttribute is " + vquestLoc);
+
+    this.load.image('background', vquestLoc);
     this.load.image('player', 'dude.png');
     this.load.image('crosshair', 'cross.png');
 }
@@ -40,14 +45,14 @@ function preload()
 function create()
 {
     // World Bounds
-    this.physics.world.setBounds(0, 0, 1600, 1200);
+    this.physics.world.setBounds(0, 0, 800, 600);
 
     // Players and reticle
     var background = this.add.image(800, 600, 'background');
     player = this.physics.add.sprite(800, 600, 'player');
     reticle = this.physics.add.sprite(800, 700, 'crosshair')
 
-    background.setOrigin(0.5, 0.5).setDisplaySize(1600, 1200);
+    background.setOrigin(0.5, 0.5).setDisplaySize(1900, 1500);
     player.setOrigin(0.5, 0.5).setDisplaySize(132,120).setCollideWorldBounds(true).setDrag(500,500);
     reticle.setOrigin(0.5, 0.5).setDisplaySize(25, 25).setCollideWorldBounds(true);
     

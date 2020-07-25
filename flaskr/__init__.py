@@ -27,10 +27,9 @@ def create_app(test_config=None):
 
     @app.route('/vquest')
     def vquest():
-        flash('TEST')
         return render_template('vquest.html')
 
-    @app.route('/login', methods=['POST', 'GET'])
+    @app.route('/login')
     def login():
         return render_template('auth/login.html')
 

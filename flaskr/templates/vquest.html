@@ -3,7 +3,8 @@
 {% block title %}VillainQuest{% endblock %}
 
 {% block content %}
+<script id="vquestLoc" data-loc="{{url_for('static', filename='img/floor.jpg')}}"></script>
 <script src="//cdn.jsdelivr.net/npm/phaser@3.24.1/dist/phaser.js"></script>
 <script src="//cdn.jsdelivr.net/npm/phaser@3.24.1/dist/phaser.min.js"></script>
-<script src="{{url_for('static', filename='scripts/jsvquest.js')}}"></script>
+<script src="{{url_for('static', filename='scripts/vquest.js')}}"></script>
 {% endblock %}

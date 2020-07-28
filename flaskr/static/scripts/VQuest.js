@@ -15,11 +15,13 @@ class VQuest extends Phaser.Scene {
         this.load.image('background', '/static/scripts/assets/floor.jpg');
         this.load.image('villain', '/static/scripts/assets/dude.jpg');
         this.load.image('crosshair', '/static/scripts/assets/cross.png');
+        this.load.image('hero', '/static/scripts/assets/hero.jpg');
     }
 
     create()
     {
         var moveKeys = null;
+        var gameOver = false;
 
         // World Bounds
         this.physics.world.setBounds(0, 0, 1600, 1200);
@@ -35,6 +37,11 @@ class VQuest extends Phaser.Scene {
         
         // Camera zoom
         this.cameras.main.zoom = 0.5;
+
+        // Bad Guys
+        var hero = new Hero({scene: this, x: 400, y: 16});
+        this.physics.add.collider(player, hero, this.hitPlayer, null, this);
+        //hero.body.setVelocity(10, 10);
 
         // Movement Keys
         moveKeys = this.input.keyboard.addKeys({
@@ -111,6 +118,12 @@ class VQuest extends Phaser.Scene {
         }, this);
 
     }
+    
+    hitPlayer()
+    {
+        this.physics.pause();
+        this.gameOver = true;
+    }
 
     constrainVelocity(sprite, maxVelocity)
     {
@@ -181,11 +194,33 @@ class VQuest extends Phaser.Scene {
         this.constrainVelocity(player, 500);
 
         this.constrainReticle(reticle, 550);
+
+        if (this.gameOver === true)
+        {
+            this.gameOver = false;
+            this.scene.start('MainMenu');
+        }
     }
 }
 
+class Hero extends Phaser.GameObjects.Sprite{
+    constructor(data)
+    {
+        super(data.scene, data.x, data.y, 'Hero');
+        data.scene.add.existing(this);
+        this.physics.add.collider(this, player);
+    }
+    
+    click()
+    {
+        console.log('Clicked');
+    }
+
+}
+
 class MainMenu extends Phaser.Scene {
-    constructor() {
+    constructor()
+    {
         super('MainMenu');
     }
 

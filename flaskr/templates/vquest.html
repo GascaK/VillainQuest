@@ -9,5 +9,8 @@
 <!-- Order of file load is important -->
 <script src="//cdn.jsdelivr.net/npm/phaser@3.24.1/dist/phaser.js"></script>
 <script src="//cdn.jsdelivr.net/npm/phaser@3.24.1/dist/phaser.min.js"></script>
-<script src="{{url_for('static', filename='scripts/vquest.js')}}"></script>
+<script type="module" src="{{url_for('static', filename='scripts/Health.js')}}"></script>
+<script type="module" src="{{url_for('static', filename='scripts/Player.js')}}"></script>
+<script type="module" src="{{url_for('static', filename='scripts/Hero.js')}}"></script>
+<script type="module" src="{{url_for('static', filename='scripts/vquest.js')}}"></script>
 {% endblock %}
